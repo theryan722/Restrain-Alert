@@ -1,0 +1,17 @@
+{
+  "name": "Restrain-Alert",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ryan O'Day",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "latest",
+    "gulp-connect": "latest",
+    "gulp-nunjucks": "^3.0.0",
+    "gulp-util": "latest",
+    "del": "^3.0.0"
+  }
+}
