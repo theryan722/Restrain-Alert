@@ -1,8 +1,4 @@
 app.onPageInit('*', function (page) {
-    //If on desktop, remove mobile nav button
-    if (checkIfDesktop()) {
-        $$('.mobilemenubutton').remove();
-    }
     if (page.name !== null) {
         setPageURL(page.name);
         updatePageTitle();

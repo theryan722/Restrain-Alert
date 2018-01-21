@@ -1,19 +1,7 @@
 function initializeDeviceOptions() {
-    if (app.device.iphone || app.device.android) {
-        loadElementHtml('#mobilemenu', 'menu/mobilemenu.html', function () {
-            updateMenuUserInfo();
-        });
-    } else {
-        if (typeof desktopMenuView === 'undefined') {
-            $$('<link rel="stylesheet" href="css/desktop.css">').insertAfter('#f7_colors');
-            getHtmlFromFile('menu/desktopmenu.html', function (deskmenusrc) {
-                $$('.views').prepend(deskmenusrc);
-                desktopMenuView = app.addView('.view-left');
-                //Display user info
-                updateMenuUserInfo();
-            });
-        }
-    }
+    loadElementHtml('#mobilemenu', 'menu/mobilemenu.html', function () {
+
+    });
 }
 
 //Checks if on ios and mobile app

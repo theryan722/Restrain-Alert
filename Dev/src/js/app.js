@@ -5,24 +5,36 @@ function exitApp() {
 
 function loginUser() {
     if ($$('input[name=login_id]').val()) {
-        updateCurrentUser($$('input[name=login_id]').val(), $$('#login_type').val()).then(function () {
-
+        updateCurrentUser($$('input[name=login_id]').val()).then(function (res) {
+            if (res) {
+                loadHomePage();
+                updateMenuUserInfo();
+            } else {
+                app.addNotification({message: 'That ID does not appear to exist.'});
+            }
         });
     }
 }
 
-function updateCurrentUser(userid, usertype) {
+function updateMenuUserInfo() {
+    $$('.menu_account_name').html(currentuser.name);
+    $$('.menu_account_role').html(currentuser.type.charAt(0).toUpperCase() + currentuser.type.substring(1));
+}
+
+function updateCurrentUser(userid) {
     return new Promise(function (resolve, reject) {
         localStorage.setItem('restrainalert_userid', userid);
-        localStorage.setItem('restrainalert_usertype', usertype);
-        firebase.firestore().collection((usertype === 'victim' ? 'victims' : 'abusers')).doc(userid).get().then(function (uinfo) {
+        firebase.firestore().collection('users').doc(userid).get().then(function (uinfo) {
             if (uinfo.exists) {
                 currentuser = {
                     id: userid,
-                    type: usertype,
+                    type: uinfo.data().type,
                     name: uinfo.data().name,
-                    summary: uinfo.data().summary
+                    summary: uinfo.data().summary,
+                    other: uinfo.data().other,
+                    distance: uinfo.data().distance
                 }
+                updateMenuUserInfo();
                 resolve(true);
             } else {
                 resolve(false);
@@ -37,16 +49,18 @@ function updateCurrentUser(userid, usertype) {
 function setUserFromLocalStorage() {
     return new Promise(function (resolve, reject) {
         let localid = localStorage.getItem('restrainalert_userid');
-        let localtype = localStorage.getItem('retstrainalert_usertype');
         if (localid) {
-            firebase.firestore().collection((localtype === 'victim' ? 'victims' : 'abusers')).doc(localid).get().then(function (uinfo) {
+            firebase.firestore().collection('users').doc(localid).get().then(function (uinfo) {
                 if (uinfo.exists) {
                     currentuser = {
                         id: localid,
-                        type: localtype,
+                        type: uinfo.data().type,
                         name: uinfo.data().name,
-                        summary: uinfo.data().summary
+                        summary: uinfo.data().summary,
+                        other: uinfo.data().other,
+                        distance: uinfo.data().distance
                     }
+                    updateMenuUserInfo();
                     resolve(true);
                 } else {
                     resolve(false);
@@ -73,12 +87,16 @@ function setupTempUsers() {
     firebase.firestore().collection('users').doc('a1z').set({
         name: 'Jackie Wang',
         type: 'victim',
-        summary: 'Abused by his boyfriend'
+        summary: 'Abused by his boyfriend',
+        other: 'bb8',
+        distance: 50
     });
     firebase.firestore().collection('users').doc('bb8').set({
         name: 'Chris Wong',
         type: 'abuser',
-        summary: 'Beat his boyfriend every night'
+        summary: 'Beat his boyfriend every night',
+        other: 'a1z',
+        distance: 50
     });
 }
 
@@ -89,12 +107,52 @@ function sendUserLocation() {
                 latitude: locdata.coords.latitude,
                 longitude: locdata.coords.longitude
             }
+            currentlocation = location;
             firebase.firestore().collection('users').doc(currentuser.id).update({
                 lastseen: firebase.firestore.FieldValue.serverTimestamp(),
                 location
             }).then(function () {
                 resolve();
             });
+        });
+    });
+}
+
+
+function getLocationOfOtherPerson() {
+    return new Promise(function (resolve, reject) {
+        if (currentuser && currentuser.other) {
+            firebase.firestore().collection('users').doc(currentuser.other).get().then(function (oinfo) {
+                if (oinfo.exists) {
+                    if (oinfo.data().location) {
+                        resolve(oinfo.data().location);
+                    } else {
+                        reject();
+                    }
+                } else {
+                    reject();
+                }
+            });
+        } else {
+            reject();
+        }
+    });
+}
+
+function checkIfTooCloseToPerson() {
+    return new Promise(function (resolve, reject) {
+        getLocationOfOtherPerson().then(function (oloc) {
+            if (currentlocation) {
+                if (getDistanceInFeet(currentlocation.latitude, currentlocation.longitude, oloc.latitude, oloc.longitude) < currentuser.distance) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            } else {
+                reject();
+            }
+        }).catch(function (error) {
+            reject();
         });
     });
 }
