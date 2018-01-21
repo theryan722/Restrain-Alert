@@ -1,0 +1,82 @@
+<div class="view view-left navbar-fixed">
+    <div class="pages">
+        <div data-page="desktopmainmenu" class="page">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="center sliding">Menu</div>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="list-block media-list">
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media">
+                                    <i class="fa fa-user-circle fa-3x" aria-hidden="true"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title menu_account_name boldtext">{{name}}</div>
+                                    </div>
+                                    <div class="item-subtitle menu_account_role">{{role}}</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <li>
+                            <a onclick="javascript:loadCoursesPage();" class="item-link close-panel">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa fa-th-list fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Courses</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="javascript:loadNotificationsPage();" class="item-link close-panel">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i id="notificationsicon" class="fa fa-bell fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Notifications</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="javascript:openURL('https://support.engagewhiz.com/');" class="item-link close-panel">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i id="notificationsicon" class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Support</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="javascript:loadSettingsPage();" class="item-link close-panel">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="fa fa-sliders-h fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <div class="item-title">Settings</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

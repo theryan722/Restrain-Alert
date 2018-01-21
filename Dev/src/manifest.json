@@ -1,0 +1,29 @@
+{
+    "short_name": "Restrain-Alert",
+    "name": "Restrain-Alert",
+    "icons": [
+        {
+            "src": "img/icon/RestrainAlert_Logo_48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        },
+        {
+            "src": "img/icon/favicon-96x96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "img/icon/apple-touch-icon-144x144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "img/icon/RestrainAlert_Logo_192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "display": "standalone",
+    "theme_color": "#2196f3",
+    "start_url": "index.html"
+}
