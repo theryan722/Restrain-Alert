@@ -9,6 +9,7 @@ function loginUser() {
             if (res) {
                 loadHomePage();
                 updateMenuUserInfo();
+                startGPS();
             } else {
                 app.addNotification({message: 'That ID does not appear to exist.'});
             }
@@ -62,6 +63,7 @@ function setUserFromLocalStorage() {
                     }
                     updateMenuUserInfo();
                     resolve(true);
+                    startGPS();
                 } else {
                     resolve(false);
                 }
@@ -162,6 +164,7 @@ function checkIfTooCloseToPerson() {
 }
 
 function startGPS() {
+    app.addNotification({message: 'Started GPS tracking...'});
     setInterval(function () {
         if (runsendinterval) {
             sendUserLocation();
