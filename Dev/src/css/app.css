@@ -1,0 +1,95 @@
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;
+    /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;
+    /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    /* prevent copy paste, to allow, change 'none' to 'text' */
+    user-select: none;
+}
+
+
+/* Allows copying of text */
+
+.allowselect {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Show pointer cursor when hovering over link */
+
+a:hover {
+    cursor: pointer;
+}
+
+.cursorpointer:hover {
+    cursor: pointer;
+}
+
+.circle-img {
+    border-radius: 50%;
+}
+
+.boldtext {
+    font-weight: bold;
+}
+
+.chat-sentphoto {
+    max-width: 300px;
+    max-height: 400px;
+}
+
+/* ======= File Upload ========= */
+
+.fileupload-wrapper {
+    background-color: #2590EB;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fileupload-wrapper .file-upload {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 100px;
+}
+
+.fileupload-wrapper .file-upload input[type='file'] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileupload-wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #2590EB;
+}
+
+
+/* ====== File Upload ========== */
+/* ======== Stripe Payment ======= */
+
+/* ======== End Stripe Payment ====== */

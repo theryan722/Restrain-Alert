@@ -90,25 +90,22 @@ function updatePageTitle(title = '') {
 }
 
 //Runs commands or loads pages based on hash and search parameters
-function runURLCommands() {
-    if (firebase.auth().currentUser) {
-        if (window.location.hash) {
-            switch (window.location.hash) {
-                default:
-                    loadCoursesPage();
-                    runUserSettings();
-            }
-        } else {
-            loadCoursesPage();
-            runUserSettings();
-        }
+function checkIfUserInitialized() {
+    if (currentuser) {
+        loadHomePage();
     } else {
-        loadLoginPage();
+        setUserFromLocalStorage().then(function (uset) {
+            if (uset) {
+                loadHomePage();
+            } else {
+                loadLoginPage();
+            }
+        });
     }
 }
 
 $$(window).on('hashchange', function () {
     if (window.location.hash === '#panel-left') {
-        loadCoursesPage();
+        loadHomePage();
     }
 });

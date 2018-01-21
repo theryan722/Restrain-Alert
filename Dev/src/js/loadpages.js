@@ -1,13 +1,11 @@
-function checkIfLoggedInBeforeLoadingPage(callback) {
-    if (firebase.auth().currentUser) {
-        callback();
-    } else {
-        loadLoginPage();
-    }
+function loadAboutPage() {
+    mainView.router.loadPage('pages/about.html');
 }
 
-function loadAboutPage() {
-    checkIfLoggedInBeforeLoadingPage(function () {
-        mainView.router.loadPage('pages/about.html');
-    });
+function loadLoginPage() {
+    mainView.router.loadPage('pages/login.html');
+}
+
+function loadHomePage() {
+    mainView.router.loadPage('pages/about.html');
 }

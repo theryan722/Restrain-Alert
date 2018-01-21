@@ -50,3 +50,5 @@ var firebaseconfig = {
 firebase.initializeApp(firebaseconfig);
 
 //------ End Initialize Firebase ------
+
+checkIfUserInitialized();

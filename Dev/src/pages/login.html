@@ -1,0 +1,45 @@
+<div data-page="login" class="page">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="center pagetitle">Enter ID</div>
+        </div>
+    </div>
+    <div class="page-content login-screen-content">
+        <br/>
+        <br/>
+        <div class="login-screen-title">Enter ID</div>
+        <!-- Login form -->
+        <form id="user_login">
+            <div class="list-block">
+                <ul>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">ID</div>
+                            <div class="item-input">
+                                <input type="text" name="login_id" autocapitalize="none" placeholder="ID">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title label">Type</div>
+                            <div class="item-input">
+                                <select id="login_type">
+                                    <option value="victim">Victim</option>
+                                    <option value="abuser">Abuser</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <a onclick="javascript:loginUser();" class="button button-raised">Enter</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
