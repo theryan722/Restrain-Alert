@@ -127,10 +127,10 @@ function getLocationOfOtherPerson() {
                     if (oinfo.data().location) {
                         resolve(oinfo.data().location);
                     } else {
-                        reject();
+                        resolve(false);
                     }
                 } else {
-                    reject();
+                    resolve(false);
                 }
             });
         } else {
@@ -142,14 +142,18 @@ function getLocationOfOtherPerson() {
 function checkIfTooCloseToPerson() {
     return new Promise(function (resolve, reject) {
         getLocationOfOtherPerson().then(function (oloc) {
-            if (currentlocation) {
-                if (getDistanceInFeet(currentlocation.latitude, currentlocation.longitude, oloc.latitude, oloc.longitude) < currentuser.distance) {
-                    resolve(true);
+            if (oloc) {
+                if (currentlocation) {
+                    if (getDistanceInFeet(currentlocation.latitude, currentlocation.longitude, oloc.latitude, oloc.longitude) < currentuser.distance) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
                 } else {
-                    resolve(false);
+                    reject();
                 }
             } else {
-                reject();
+                resolve(false);
             }
         }).catch(function (error) {
             reject();
@@ -157,9 +161,35 @@ function checkIfTooCloseToPerson() {
     });
 }
 
+function startGPS() {
+    setInterval(function () {
+        if (runsendinterval) {
+            sendUserLocation();
+        }
+    }, 6000);
+    setInterval(function () {
+        if (runcheckinterval) {
+            checkIfTooCloseToPerson().then(function (isclose) {
+                if (isclose) {
+                    if (currentuser.type === 'victim') {
+                        loadWarningVictimPage();
+                    } else {
+                        //abuser
+                        loadWarningAbuserPage();
+                    }
+                }
+            });
+        }
+    }, 4000);
+}
+
 function signOut() {
     app.confirm('Are you sure you want to sign out?', 'Sign Out', function  () {
         localStorage.removeItem('restrainalert_userid');
         location.reload();
     });
+}
+
+function alertAuthorities() {
+    app.alert('In this scenario, either 911 or some other operator would be dialed. They will also receive the users location in real time and the last time they were seen.', 'Alert Emergency Services');
 }

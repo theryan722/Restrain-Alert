@@ -8,7 +8,7 @@ app.onPageInit('*', function (page) {
 app.onPageAfterBack('*', function (page) {
     if (mainView.activePage.name === 'panel-left') {
         setTimeout(function () {
-            loadCoursesPage();
+            loadHomePage();
         }, 150);
     }
 });

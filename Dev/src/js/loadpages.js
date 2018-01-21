@@ -7,5 +7,13 @@ function loadLoginPage() {
 }
 
 function loadHomePage() {
-    mainView.router.loadPage('pages/about.html');
+    mainView.router.loadPage('pages/home.html');
+}
+
+function loadWarningAbuserPage() {
+    mainView.router.loadPage('pages/warning_abuser.html');
+}
+
+function loadWarningVictimPage() {
+    mainView.router.loadPage('pages/warning_victim.html');
 }
