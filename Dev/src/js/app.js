@@ -156,3 +156,10 @@ function checkIfTooCloseToPerson() {
         });
     });
 }
+
+function signOut() {
+    app.confirm('Are you sure you want to sign out?', 'Sign Out', function  () {
+        localStorage.removeItem('restrainalert_userid');
+        location.reload();
+    });
+}
